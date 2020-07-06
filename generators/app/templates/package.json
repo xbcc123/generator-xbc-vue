@@ -1,0 +1,48 @@
+{
+  "name": "vue_mana",
+  "version": "1.0.1",
+  "description": "Vue后台管理项目",
+  "private": true,
+  "scripts": {
+    "build": "fef build",
+    "start": "webpack-dev-server --watch --progress --open --config build/webpack.dev.conf.js"
+  },
+  "keywords": [
+    "vue"
+  ],
+  "author": "Shawn",
+  "license": "ISC",
+  "husky": {
+    "hooks": {
+      "commit-msg": "commitlint -E HUSKY_GIT_PARAMS"
+    }
+  },
+  "devDependencies": {
+    "@babel/core": "^7.4.4",
+    "@babel/plugin-proposal-class-properties": "^7.8.3",
+    "@babel/plugin-proposal-decorators": "^7.8.3",
+    "@babel/plugin-proposal-object-rest-spread": "^7.7.4",
+    "@babel/preset-env": "^7.4.4",
+    "@babel/preset-typescript": "^7.7.4",
+    "@commitlint/cli": "^8.3.5",
+    "@commitlint/config-conventional": "^8.3.4",
+    "autoprefixer": "^9.4.4",
+    "babel-plugin-transform-decorators-legacy": "^1.3.5",
+    "eslint": "^7.1.0",
+    "eslint-config-prettier": "^6.11.0",
+    "eslint-plugin-prettier": "^3.1.3",
+    "feflow-devkit-xbc-webpack4": "^0.0.29",
+    "husky": "^4.2.5",
+    "mockjs": "^1.1.0"
+  },
+  "dependencies": {},
+  "engines": {
+    "node": ">= 6.0.0",
+    "npm": ">= 3.0.0"
+  },
+  "browserslist": [
+    "> 1%",
+    "last 2 versions",
+    "not ie <= 8"
+  ]
+}
