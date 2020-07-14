@@ -8,8 +8,31 @@
 	</section>
 </template>
 
-<script>
-export default {};
+<script lang="ts">
+import { Vue, Component, Prop, Watch, Emit } from "vue-property-decorator"
+
+@Component({
+	components: {
+	}
+})
+
+export default class Index extends Vue {
+	@Prop() readonly propsA!: object
+
+	@Emit()
+	test(val) {
+		return val
+	}
+
+	list: Array<object> = []
+	name: string = ""
+	number: number = 0
+	status: boolean = false
+
+	created() {
+	}
+
+}
 </script>
 
 <style scoped lang="scss">
