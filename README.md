@@ -1,2 +1,2 @@
-# generator-xbc-react
+# generator-xbc-vue
 
