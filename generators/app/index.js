@@ -28,7 +28,9 @@ const Utils = {
 	},
 
 	noDotFiles(x) {
-		return x[0] !== '.';
+		// console.log(x)
+		// return x[0] !== '.'; // 过滤器前面为.的文件
+		return true
 	}
 }
 
@@ -88,6 +90,16 @@ module.exports = class extends Generator {
 	// 获取文件目录
 	const sourceDir = path.join(this.templatePath());
 	const filePaths = Utils.read(sourceDir);
+	console.log(filePaths)
+	// this.fs.copyTpl(
+    //     `${this.templatePath()}/**/!(_)*`,
+    //     this.destinationPath(),
+    //     this.answers,
+    //     {},
+    //     { globOptions: { dot: true, ignore: ['.+\.png']  } }    // Copy all dots files.
+	// );
+
+	// ejs无法编译png等文件 png等文件中带有%会导致ejs编译失败
 	filePaths.forEach(filePath => {
 		if(/.+\.html/.test(filePath)) {
 			this.fs.copyTpl(
@@ -101,6 +113,9 @@ module.exports = class extends Generator {
 			this.fs.copy(
 				`${this.templatePath()}/${filePath}`,
 				`${this.destinationPath()}/${filePath}`,
+				{ globOptions: { dot: true } },
+				this.answers,
+				{}
 			);
 		}
 	})
@@ -111,9 +126,8 @@ module.exports = class extends Generator {
    */
   install() {
     const { logger } = this.options;
-
-    logger.info('安装依赖，过程持续1~2分钟');
-    this.npmInstall();
+    // logger.info('安装依赖，过程持续1~2分钟');
+    // this.npmInstall();
   }
 
   /**
@@ -123,11 +137,12 @@ module.exports = class extends Generator {
     const { name } = this.answers;
     const { logger } = this.options;
 
-    logger.info('本次初始化过程结束, 请通过以下命令运行项目: ');
-    console.log();
-    // console.log(chalk.cyan('  cd'), name);
+    // logger.info('本次初始化过程结束, 请通过以下命令运行项目: ');
+    console.log('本次初始化过程结束, 请通过以下命令运行项目: ');
+	console.log(chalk.cyan('  cd'), name);
+	console.log(chalk.cyan('  cnpm i'),);
     console.log(`  ${chalk.cyan('fef dev')}`);
-    console.log();
-    logger.info('编码愉快!');
+    console.log('  编码愉快!');
+    // logger.info('编码愉快!');
   }
 };
