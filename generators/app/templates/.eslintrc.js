@@ -1,17 +1,17 @@
 
 module.exports = {
 	root: true,
-	parser: '@typescript-eslint/parser',
+	parserOptions: { // 解析器选项
+        parser: '@typescript-eslint/parser' // 一个对Babel解析器的包装，使其能够与 ESLint 兼容
+    },
 	extends: [
 		'eslint:recommended',
 		'plugin:vue/recommended',
-		'plugin:@typescript-eslint/recommended',
 		'plugin:prettier/recommended'
 	],
 	// required to lint *.vue files
 	plugins: [
 		'vue',
-		'@typescript-eslint',
 	],
 	// add your custom rules here
 	rules: {
