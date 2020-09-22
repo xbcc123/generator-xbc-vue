@@ -1,59 +1,144 @@
-import axios from "axios";
-// import { message } from "antd";
-import app from "@/app";
-import qs from "qs";
+/* eslint-disable */
+import axios from "axios"
+import qs from "qs"
+import utils from "@/utils/utils"
+import { Message } from "element-ui"
+import router from "@/router/index"
 
 // 配置axios
 let instance = axios.create({
-	// baseURL: process.env.API_HOST
-	baseURL: 'https://localhost:8080'
-	// timeout: 5000
-});
-
-// 禁止多次返回首页
-let ISBACKHOME = true
+	// eslint-disable-next-line no-undef
+	baseURL: process.env.API_HOST
+})
 
 // 请求拦截器
 instance.interceptors.request.use(
 	config => {
-		config.headers.token = app.$storage.get("token");
-		return config;
+		config.headers.clientType = "OMS_WEB"
+		config.headers.accessToken = utils.encrypt(
+			`${new Date().getTime()},${localStorage.accessToken}`
+		)
+		return config
 	},
 	error => {
-		return Promise.reject(error);
+		return Promise.reject(error)
 	}
-);
+)
 
 // 返回拦截器
 instance.interceptors.response.use(
 	response => {
-		if (!response.status === 200) {
-			// 请求失败
-			// message.error("服务器繁忙，请重试");
-		}
-		if(response.data.code === 200 ) {
-		}else if (response.data.code === 203 ) {
-			if(ISBACKHOME) {
-				ISBACKHOME = false
-				console.log(222, ISBACKHOME)
-				// message.error(response.data.msg);
-				window.location.href = `${window.location.pathname}#/login`;
-				setTimeout(() => {
-					ISBACKHOME = true
-				}, 2000)
-			}
-		} else {
-			// message.error(response.data.msg);
-		}
-		return response;
+		new InterceptorsStatus(response)
+		new InterceptorsCode(response)
+		return response
 	},
 	error => {
-		// message.error("服务器繁忙，请重试");
-		return Promise.reject(error);
+		new InterceptorsStatus(error.response)
+		return Promise.reject(error)
 	}
-);
+)
+
+// 老板本逻辑根据res.data.code判断不同的状态
+class InterceptorsCode {
+	code: any
+	msg: any
+	codeMap: Map<any, any>
+	constructor(response) {
+		// 如果data code 不存在默认加上code 为了兼容新版本逻辑
+		response.data = response.data || {}
+		this.code = response.data.code || 200
+		this.msg = response.data.msg || ""
+		this.codeMap = new Map()
+			.set(200, "requestSuccess")
+			.set(203, "noLogin")
+			.set(206, "noLogin")
+		if (this.codeMap.has(this.code)) {
+			this[this.codeMap.get(this.code)]()
+		} else {
+			this.serverError(this.msg)
+		}
+	}
+
+	// 业务完成
+	requestSuccess() {
+	}
+
+	// 未登录
+	noLogin() {
+		setTimeout(() => {
+			router.push("/login")
+		}, 100)
+	}
+
+	// 服务器接口主动报错,一般为业务错误
+	serverError(msg) {
+		Message.error(msg)
+	}
+}
+
+// 改版后的拦截规则 全部逻辑根据http状态码判断
+// 说明详细地址 http://192.168.16.20/dev-document/dev-doc/blob/master/docs/HTTP%E7%8A%B6%E6%80%81%E7%A0%81%E8%AF%B4%E6%98%8E.md
+class InterceptorsStatus {
+	info: any
+	statusMap: Map<any, any>
+	constructor(options) {
+		const status = options.status
+		this.info = options
+		this.statusMap = new Map()
+			.set(200, "requestSuccess")
+			.set(401, "noPermissions")
+			.set(403, "noLogin")
+			.set(404, "interfaceNotFound")
+			.set(405, "functionError")
+			.set(406, "paramsError")
+			.set(500, "serverError")
+		if (this.statusMap.has(status)) {
+			this[this.statusMap.get(status)]()
+		}
+	}
+
+	// 业务完成
+	requestSuccess() {
+		// console.log("接口调用成功");
+	}
+
+	// 无权限
+	noPermissions() {
+		Message.error("接口无权限")
+	}
+
+	// 未登录
+	noLogin() {
+		setTimeout(() => {
+			router.push("/login")
+		}, 100)
+	}
+
+	// 接口不存在
+	interfaceNotFound() {
+		Message.error("接口不存在")
+	}
+
+	// 请求方式错误
+	functionError() {
+		Message.error("请求方式错误")
+	}
+
+	// 参数错误
+	paramsError() {
+		Message.error(this.info.data)
+	}
+
+	// 服务器错误
+	serverError() {
+		Message.error("服务器错误")
+	}
+}
 
 export default {
+	// axios实例
+	instance,
+
 	/**
 	 * GET请求
 	 *
@@ -62,20 +147,15 @@ export default {
 	 */
 	get(url, params) {
 		if (!url) {
-			return;
+			return
 		}
 		return new Promise((resolve, reject) => {
 			instance.get(url, { params }).then(response => {
-				const {
-					data: { code }
-				} = response;
-				if (code === 200) {
-					resolve(response);
-				} else {
-					reject(response);
-				}
-			});
-		});
+				resolve(response)
+			}).catch(error => {
+				reject(error)
+			})
+		})
 	},
 
 	/**
@@ -86,26 +166,22 @@ export default {
 	 */
 	post(url, params) {
 		if (!url) {
-			return;
+			return
 		}
 		const config = {
 			headers: {
 				"Content-type": "application/x-www-form-urlencoded"
 			}
-		};
+		}
 		return new Promise((resolve, reject) => {
 			instance.post(url, qs.stringify(params), config).then(response => {
-				const {
-					data: { code }
-				} = response;
-				if (code === 200) {
-					resolve(response);
-				} else {
-					reject(response);
-				}
-			});
-		});
+				resolve(response)
+			}).catch(error => {
+				reject(error)
+			})
+		})
 	},
+
 	/**
 	 * POST请求
 	 *
@@ -114,20 +190,15 @@ export default {
 	 */
 	postJson(url, params) {
 		if (!url) {
-			return;
+			return
 		}
 		return new Promise((resolve, reject) => {
 			instance.post(url, params).then(response => {
-				const {
-					data: { code }
-				} = response;
-				if (code === 200) {
-					resolve(response);
-				} else {
-					reject(response);
-				}
-			});
-		});
+				resolve(response)
+			}).catch(error => {
+				reject(error)
+			})
+		})
 	},
 
 	/**
@@ -138,7 +209,7 @@ export default {
 	 */
 	upload(url, formData) {
 		if (!url) {
-			return;
+			return
 		}
 		return new Promise((resolve, reject) => {
 			instance
@@ -148,15 +219,10 @@ export default {
 					}
 				})
 				.then(response => {
-					const {
-						data: { code }
-					} = response;
-					if (code === 200) {
-						resolve(response);
-					} else {
-						reject(response);
-					}
-				});
-		});
+					resolve(response)
+				}).catch(error => {
+					reject(error)
+				})
+		})
 	}
-};
+}

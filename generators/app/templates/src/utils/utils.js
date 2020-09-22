@@ -1,8 +1,52 @@
 // 自定义工具方法
 
-import { Modal, Button, Input, message, InputNumber } from "antd";
+import CryptoJS from "crypto-js"
+
 class util {
 	constructor() {}
+
+		/**
+	 * 加密（需要先加载lib/aes/aes.min.js文件）
+	 * @param word
+	 * @returns {*}
+	 */
+
+	encrypt(word) {
+		var key = CryptoJS.enc.Utf8.parse("acdwessdbatar123")
+		var srcs = CryptoJS.enc.Utf8.parse(word)
+		var encrypted = CryptoJS.AES.encrypt(srcs, key, {
+			mode: CryptoJS.mode.ECB,
+			padding: CryptoJS.pad.Pkcs7
+		})
+		return encrypted.toString()
+	}
+
+	/**
+	 * 解密
+	 * @param word
+	 * @returns {*}
+	 */
+	decrypt(word) {
+		var key = CryptoJS.enc.Utf8.parse("acdwessdbatar123")
+		var decrypt = CryptoJS.AES.decrypt(word, key, {
+			mode: CryptoJS.mode.ECB,
+			padding: CryptoJS.pad.Pkcs7
+		})
+		return CryptoJS.enc.Utf8.stringify(decrypt).toString()
+	}
+
+	//判断是否是微信浏览器的函数
+	isWeiXin() {
+		//window.navigator.userAgent属性包含了浏览器类型、版本、操作系统类型、浏览器引擎类型等信息，这个属性可以用来判断浏览器类型
+		var ua = window.navigator.userAgent.toLowerCase()
+		//通过正则表达式匹配ua中是否含有MicroMessenger字符串
+		if (ua.match(/MicroMessenger/i) == "micromessenger") {
+			return true
+		} else {
+			return false
+		}
+	}
+
 
 	parseUrlParams(search) {
 		if (search.length <= 0) return false;
@@ -206,7 +250,7 @@ class util {
             } else {
                 if (value === '' || value === null || value === undefined) {
                     delete object[i]
-                } 
+                }
             }
         }
         return object

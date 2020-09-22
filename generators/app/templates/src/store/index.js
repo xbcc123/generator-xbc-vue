@@ -3,6 +3,8 @@ import Vuex from "vuex"
 
 // 产品
 import demo from "./modules/demo"
+import global from "./modules/global"
+
 import createLogger from "./plugins/logger"
 
 Vue.use(Vuex)
@@ -20,8 +22,8 @@ export default new Vuex.Store({
 	},
 	modules: {
 		demo,
+		global
 	},
 	strict: debug,
-	plugins: debug ? [createLogger()] : [],
-	strict: false
+	plugins: debug ? [createLogger()] : []
 })

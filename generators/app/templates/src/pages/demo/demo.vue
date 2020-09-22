@@ -1,10 +1,20 @@
 <template>
 	<section class="ml30 pt30">
-		<h1 class="f30">Hello World!!!</h1>
-		<h1 class="f20 c9 mt10">项目类型: Vue</h1>
-		<h1 class="f20 c9 mt10">应用场景: 后台管理</h1>
-		<h1 class="f20 c9 mt10">UI框架: element</h1>
-		<h1 class="f20 c9 mt10">状态管理: Vuex</h1>
+		<h1 class="f30">
+			Hello World!!!
+		</h1>
+		<h1 class="f20 c9 mt10">
+			项目类型: Vue
+		</h1>
+		<h1 class="f20 c9 mt10">
+			应用场景: 后台管理
+		</h1>
+		<h1 class="f20 c9 mt10">
+			UI框架: element
+		</h1>
+		<h1 class="f20 c9 mt10">
+			状态管理: Vuex
+		</h1>
 	</section>
 </template>
 
@@ -12,10 +22,8 @@
 import { Vue, Component, Prop, Watch, Emit } from "vue-property-decorator"
 
 @Component({
-	components: {
-	}
+	components: {}
 })
-
 export default class Index extends Vue {
 	@Prop() readonly propsA!: object
 
@@ -29,14 +37,8 @@ export default class Index extends Vue {
 	number: number = 0
 	status: boolean = false
 
-	created() {
-	}
-
+	created() {}
 }
 </script>
 
-<style scoped lang="scss">
-
-
-</style>
-
+<style scoped lang="scss"></style>

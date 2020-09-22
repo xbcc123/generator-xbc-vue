@@ -62,7 +62,7 @@ module.exports = {
 				},
 				{
                     module: "element-ui",
-                    entry: "../../static/js/element-ui2.2.1.min.js",
+                    entry: "../../static/js/element-ui2.13.2.min.js",
                     global: "ELEMENT"
                 },
 			],
@@ -90,31 +90,31 @@ module.exports = {
                 formalTest: {
                     envObj: {
                         NODE_ENV: "'formalTest'",
-                        API_HOST: "'http://192.168.16.8:8201'",
-						SJY_URL: "'http://192.168.16.8:8511'",
-						HEHE_URL: "'http://192.168.16.8:8611'",
-						API_HOST_H5: "'http://192.168.16.8:8201'",
-						API_IMG: "'http://192.168.16.8:9999/'"
+						API_HOST: "'http://192.168.16.9:8081'",
+                    	SJY_URL: "'http://192.168.16.9:9000'",
+						HEHE_URL: "'http://192.168.16.9:9001'",
+						API_HOST_H5: "'http://192.168.16.9:8081'",
+						API_IMG: "'http://192.168.16.103:9999/'"
                     }
                 },
                 demo: {
                     envObj: {
                         NODE_ENV: "'demo'",
-                        API_HOST: "'http://192.168.16.8:8301'",
-						SJY_URL: "'http://192.168.16.8:8301'",
-						HEHE_URL: "'http://192.168.16.8:8611'",
-						API_HOST_H5: "'http://192.168.16.8:8611'",
-						API_IMG: "'http://image.szsjysy.com/'"
+						API_HOST: "'http://192.168.16.9:8081'",
+                    	SJY_URL: "'http://192.168.16.9:9000'",
+						HEHE_URL: "'http://192.168.16.9:9001'",
+						API_HOST_H5: "'http://192.168.16.9:8081'",
+						API_IMG: "'http://192.168.16.103:9999/'"
                     }
                 },
                 build: {
                     envObj: {
                         NODE_ENV: "'production'",
-                        API_HOST: "'http://m.szsjysy.com'",
-						SJY_URL: "'http://front.szsjysy.com'",
-						HEHE_URL: "'http://hh.front.ezgold.cn'",
-						API_HOST_H5: "'http://m.szsjysy.com'",
-						API_IMG: "'http://image.szsjysy.com/'"
+						API_HOST: "'http://192.168.16.9:8081'",
+                    	SJY_URL: "'http://192.168.16.9:9000'",
+						HEHE_URL: "'http://192.168.16.9:9001'",
+						API_HOST_H5: "'http://192.168.16.9:8081'",
+						API_IMG: "'http://192.168.16.103:9999/'"
                     }
                 }
             }
