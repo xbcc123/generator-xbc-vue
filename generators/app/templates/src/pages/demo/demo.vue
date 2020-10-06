@@ -1,3 +1,4 @@
+/* eslint-disable no-undef */
 <template>
 	<section class="ml30 pt30">
 		<h1 class="f30">
@@ -37,7 +38,17 @@ export default class Index extends Vue {
 	number: number = 0
 	status: boolean = false
 
-	created() {}
+	created() {
+		// pont演示
+		// let paramsNew: API.post.testCreateUser.Params = {
+		// 	gender: "",
+		// 	platformList: [],
+		// 	username: ""
+		// }
+		// API.post.testCreateUser.request(paramsNew).then(res => {
+		// 	console.log()
+		// })
+	}
 }
 </script>
 

@@ -1,4 +1,5 @@
 import http from "./http"
+import "../services"
 
 class Api {
 	http: any
