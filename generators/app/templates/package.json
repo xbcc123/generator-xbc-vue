@@ -35,7 +35,7 @@
     "eslint-config-prettier": "^6.11.0",
     "eslint-plugin-prettier": "^3.1.4",
     "eslint-plugin-vue": "^6.2.2",
-    "fs": "^0.0.1-security",
+    "feflow-devkit-xbc-webpack4": "^0.0.29",
     "husky": "^4.2.5",
     "mockjs": "^1.1.0",
     "pont-engine": "1.0.3",
