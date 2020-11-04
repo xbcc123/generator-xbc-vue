@@ -1,14 +1,14 @@
 <template>
 	<div class="conBigDiv">
 		<div id="loginBig">
-			<el-row>
-				<el-col :span="12">
+			<a-row>
+				<a-col :span="12">
 					<img
 						src="/static/images/loginImg/leftIco.png"
 						class="leftIco"
 					/>
-				</el-col>
-				<el-col :span="12">
+				</a-col>
+				<a-col :span="12">
 					<div class="loginRight">
 						<div class="loginRightOne">
 							<img
@@ -17,7 +17,7 @@
 							/>
 						</div>
 						<div class="loginRightTwo">
-							<el-input
+							<a-input
 								v-model="userName"
 								placeholder="请输入用户名"
 								size="large"
@@ -25,9 +25,9 @@
 								<template slot="prepend">
 									<i class="iconfont icon-yonghuming"></i>
 								</template>
-							</el-input>
+							</a-input>
 							<br />
-							<el-input
+							<a-input
 								ref="userPassword"
 								v-model="userPassword"
 								placeholder="请输入密码"
@@ -40,20 +40,20 @@
 										class="iconfont icon-mima"
 									></i>
 								</template>
-							</el-input>
+							</a-input>
 						</div>
 						<div class="loginRightThree">
-							<el-button
+							<a-button
 								type="primary"
 								class="loginBtn"
 								@click="loginFun"
 							>
 								登 录
-							</el-button>
+							</a-button>
 						</div>
 					</div>
-				</el-col>
-			</el-row>
+				</a-col>
+			</a-row>
 			<div class="divVersion">
 				<div>当前版本系统V0.0.1</div>
 			</div>
@@ -96,13 +96,13 @@ export default {
 				if (res.data.code == 200) {
 					localStorage.accessToken = res.data.data
 					this.setCookie("heheToken", res.data.data)
-					this.$message({
-						duration: 1500,
-						showClose: true,
-						message: "登录成功，正在跳转中！",
-						type: "success"
-					})
-					this.$router.push("/index")
+					// this.$message({
+					// 	duration: 1500,
+					// 	showClose: true,
+					// 	message: "登录成功，正在跳转中！",
+					// 	type: "success"
+					// })
+					this.$router.push("/indexAnt")
 				}
 			})
 		},

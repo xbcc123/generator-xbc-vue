@@ -45,7 +45,7 @@ module.exports = {
             entry: "index.tsx",
             isModule: false,
             isMinicss: true,
-            hasAnalyzer: false,
+            hasAnalyzer: true,
             analyzer: {
                 "analyzerPort": 3479
             },
@@ -60,11 +60,11 @@ module.exports = {
                     entry: "../../static/js/vue2.5.2.js",
                     global: "Vue"
 				},
-				{
-                    module: "element-ui",
-                    entry: "../../static/js/element-ui2.13.2.min.js",
-                    global: "ELEMENT"
-                },
+				// {
+                //     module: "element-ui",
+                //     entry: "../../static/js/element-ui2.13.2.min.js",
+                //     global: "ELEMENT"
+                // },
 			],
             envs: {
                 dev: {

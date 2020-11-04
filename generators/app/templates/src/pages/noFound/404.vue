@@ -25,16 +25,15 @@
 			</div>
 			<div class="bullshit">
 				<div class="bullshit__oops">
-					OOPS!
+					页面未找到!
 				</div>
-				<div class="bullshit__headline">
+				<!-- <div class="bullshit__headline">
 					{{ message }}
-				</div>
+				</div> -->
 				<div class="bullshit__info">
-					Please check that the URL you entered is correct, or click
-					the button below to return to the homepage.
+					请检查您输入的网址是否正确，或单击下面的按钮返回首页
 				</div>
-				<a href="" class="bullshit__return-home">Back to home</a>
+				<a href="" class="bullshit__return-home">点击返回首页</a>
 			</div>
 		</div>
 	</div>
@@ -45,7 +44,7 @@ export default {
 	name: "Page404",
 	computed: {
 		message() {
-			return "The webmaster said that you can not enter this page..."
+			return "网站管理员说您不能进入这个页面…"
 		}
 	}
 }

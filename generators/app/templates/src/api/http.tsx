@@ -2,7 +2,7 @@
 import axios from "axios"
 import qs from "qs"
 import utils from "@/utils/utils"
-import { Message } from "element-ui"
+// import { Message } from "element-ui"
 import router from "@/router/index"
 
 // 配置axios
@@ -72,7 +72,7 @@ class InterceptorsCode {
 
 	// 服务器接口主动报错,一般为业务错误
 	serverError(msg) {
-		Message.error(msg)
+		// Message.error(msg)
 	}
 }
 
@@ -104,7 +104,7 @@ class InterceptorsStatus {
 
 	// 无权限
 	noPermissions() {
-		Message.error("接口无权限")
+		// Message.error("接口无权限")
 	}
 
 	// 未登录
@@ -116,22 +116,22 @@ class InterceptorsStatus {
 
 	// 接口不存在
 	interfaceNotFound() {
-		Message.error("接口不存在")
+		// Message.error("接口不存在")
 	}
 
 	// 请求方式错误
 	functionError() {
-		Message.error("请求方式错误")
+		// Message.error("请求方式错误")
 	}
 
 	// 参数错误
 	paramsError() {
-		Message.error(this.info.data)
+		// Message.error(this.info.data)
 	}
 
 	// 服务器错误
 	serverError() {
-		Message.error("服务器错误")
+		// Message.error("服务器错误")
 	}
 }
 

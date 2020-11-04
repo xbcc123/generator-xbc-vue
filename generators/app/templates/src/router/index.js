@@ -7,6 +7,7 @@ Vue.use(Router)
 const Demo = () => import("@/pages/demo/demo")
 const noFound = () => import("@/pages/noFound/404")
 const Index = () => import("@/pages/index/index") // 首页
+const IndexAnt = () => import("@/pages/index/indexAnt") // 首页ant
 const Login = () => import("@/pages/login/login") // 登陆页面
 
 let routes = [
@@ -17,6 +18,11 @@ let routes = [
 	{
 		path: "/index",
 		component: Index,
+		children: []
+	},
+	{
+		path: "/indexAnt",
+		component: IndexAnt,
 		children: []
 	},
 	{

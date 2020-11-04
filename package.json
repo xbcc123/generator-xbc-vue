@@ -1,7 +1,7 @@
 {
   "name": "generator-xbc-vue",
-  "version": "1.0.26",
-  "description": "中谷科技Vue+Vuex+element后台管理",
+  "version": "1.0.27",
+  "description": "中谷科技Vue+Vuex后台管理",
   "homepage": "",
   "files": [
     "generators"
