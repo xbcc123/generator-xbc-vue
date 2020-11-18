@@ -5,7 +5,7 @@ module.exports = {
                 builder: "feflow-devkit-xbc-webpack4:dev",
                 options: {
                     isMinicss: false,
-					port: 5674
+					port: 1234
                 },
             },
             test: {
@@ -45,7 +45,7 @@ module.exports = {
             entry: "index.tsx",
             isModule: false,
             isMinicss: true,
-            hasAnalyzer: true,
+            hasAnalyzer: false,
             analyzer: {
                 "analyzerPort": 3479
             },
