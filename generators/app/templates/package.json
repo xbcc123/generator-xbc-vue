@@ -36,7 +36,7 @@
     "eslint-config-prettier": "^6.11.0",
     "eslint-plugin-prettier": "^3.1.4",
     "eslint-plugin-vue": "^6.2.2",
-    "feflow-devkit-xbc-webpack4": "^0.1.2",
+    "feflow-devkit-xbc-webpack4": "^0.1.4",
     "husky": "^4.2.5",
     "pont-engine": "1.0.3",
     "typescript": "^3.9.7",
